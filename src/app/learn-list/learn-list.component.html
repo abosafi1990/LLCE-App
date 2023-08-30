@@ -1,0 +1,57 @@
+<div class="app-container">
+  <header class="header">
+      <h1 class="app-title">LLCE App</h1>
+      <p class="app-description">Your LPIC-1 Learning Companion</p>
+  </header>
+
+  <main class="main-content">
+      <h3 class="modeRed">Learn Mode List</h3>
+      <button class="mode-button" routerLink="/learnsingle">Single Question Mode</button> <br />
+      <hr />
+      
+      <h3 class="modeRed">Learning with a list</h3>
+
+      <div *ngFor="let q of questions; index as ind" class="question-container">
+          Frage: {{ q.qid }} Typ: {{ q.qtyp }} <br />
+          <span *ngFor="let txt of q.qtxt">
+              <span *ngIf="txt[0] == ' '">
+                  <br />
+                  <code class="cblue"> {{ txt }}</code>
+              </span>
+              <span *ngIf="txt[0] != ' '">
+                  {{ txt }}
+              </span>
+          </span>
+          <div *ngIf="q.qtyp == 'fi'">
+              <div *ngFor="let ans of q.qanswers">
+                  <span *ngIf="whatIsCorrect && currentQuestion == ind" class="correctGreen">
+                      {{ ans.txt }}
+                  </span>
+              </div>
+          </div>
+          <div *ngIf="q.qtyp != 'fi'">
+              <div *ngFor="let ans of q.qanswers">
+                  <span *ngIf="currentQuestion == ind">
+                      <span *ngIf="whatIsCorrect && ans.correct" class="correctGreen">
+                          {{ ans.txt }}
+                      </span>
+                      <span *ngIf="whatIsCorrect && !ans.correct">
+                          {{ ans.txt }}
+                      </span>
+
+                      <span *ngIf="!whatIsCorrect">
+                          {{ ans.txt }}
+                      </span>
+                  </span>
+                  <span *ngIf="currentQuestion != ind">
+                      {{ ans.txt }}
+                  </span>
+              </div>
+          </div>
+
+          <button (click)="toggleCorrect(ind)">What is correct?</button>
+          <br />
+          <br />
+      </div>
+  </main>
+</div>

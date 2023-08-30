@@ -1,0 +1,55 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffc107; /* Gelb */
+  color: black; /* Schwarz */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-title {
+  font-size: 24px;
+  color: white; /* Weiß */
+}
+
+.app-description {
+  font-size: 16px;
+  color: white; /* Weiß */
+}
+
+.main-content {
+  text-align: center;
+}
+
+.main-heading {
+  font-size: 28px;
+  color: white; /* Weiß */
+}
+
+.sub-heading {
+  font-size: 18px;
+  color: white; /* Weiß */
+  margin-bottom: 20px;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.mode-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: salmon; /* Weiß */
+  background-color: #fff; /* Weiß */
+}

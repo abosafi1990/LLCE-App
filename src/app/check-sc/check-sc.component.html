@@ -1,0 +1,82 @@
+<body>
+  <div *ngIf="popupWarning">
+    <h1 class="modeRed">Warning: Antwort(en) geraten!</h1>
+    <h1 class="modeRed">Warning: darum eine Frage zurück :)</h1>
+    <button (click)="popupWarning = !popupWarning">OK, habe geraten :(</button>
+  </div>
+  <div *ngIf="!popupWarning">
+    <h3 class="modeRed">Check Mode SC</h3>
+  
+  
+  
+    Frage: {{ question.qid }} Typ: {{ question.qtyp }} <br />
+    <span *ngFor="let txt of question.qtxt">
+      <span *ngIf="txt[0] == ' '">
+        <br />
+        <code class="cblue"> {{ txt }}</code>
+      </span>
+      <span *ngIf="txt[0] != ' '">
+        {{ txt }}
+      </span>
+    </span>
+  
+    <div *ngIf="question.qtyp == 'sc'">
+      <div *ngFor="let ans of question.qanswers; index as ind">
+        <span *ngIf="whatIsCorrect && ans.correct" class="correctGreen">
+          <span *ngIf="ans.givenanswer">
+            <input type="radio" disabled checked/>
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="radio" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+        <span *ngIf="whatIsCorrect && !ans.correct">
+          <span *ngIf="ans.givenanswer">
+            <input type="radio" disabled checked/>
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="radio" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+        <br>
+  
+        <span *ngIf="!whatIsCorrect">
+          <input
+            *ngIf="ans.givenanswer"
+            type="radio"
+            name="question.qtyp"
+            (click)="selectAnswerSC(ind)"
+            checked
+          />
+          <input
+            *ngIf="!ans.givenanswer"
+            type="radio"
+            name="question.qtyp"
+            (click)="selectAnswerSC(ind)"
+          />
+          {{ ans.txt }}
+        </span>
+      </div>
+      <br>
+      <div>
+        <button class="fpnlButton" (click)="firstQuestion()">first</button>
+        <button class="fpnlButton" (click)="prevQuestion()">prev</button>
+        <button class="correctGreen" (click)="toggleCorrect(currentQuestion)">
+          What is correct?
+        </button>
+        <button class="fpnlButton" (click)="nextQuestion()">next</button>
+        <button class="fpnlButton" (click)="lastQuestion()">last</button>
+        <br />
+      </div>
+    </div>
+  
+    <br />
+    <br />
+  </div>
+  
+
+</body>

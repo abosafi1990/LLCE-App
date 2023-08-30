@@ -1,0 +1,18 @@
+.cblue {
+    color: blue;
+  }
+  .correctGreen {
+    color: green;
+    font-weight: bold;
+  
+  }
+  .fpnlButton {
+    color:black
+  }
+  .modeRed {
+    color: red;
+  }
+  body {
+    background-color: #ffc107;
+  }
+  

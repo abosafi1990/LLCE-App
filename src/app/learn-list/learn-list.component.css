@@ -1,0 +1,94 @@
+
+.header {
+  text-align: left; /* Links ausrichten */
+  margin-bottom: 20px;
+  background-color: #ffc107; /* Gelb */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.app-title {
+  font-size: 24px;
+  color: white; /* Weiß */
+}
+
+.app-description {
+  font-size: 16px;
+  color: white; /* Weiß */
+}
+
+.main-content {
+  text-align: center;
+}
+
+.main-heading {
+  font-size: 28px;
+  color: white; /* Weiß */
+}
+
+.sub-heading {
+  font-size: 18px;
+  color: white; /* Weiß */
+  margin-bottom: 20px;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.mode-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: black; /* Lachsfarbe */
+  background-color: burlywood; /* Weiß */
+}
+
+.modeRed {
+  color: red; /* Rot */
+}
+
+.question-container {
+  margin-top: 20px;
+  background-color: #ffc107; /* Gelb */
+  border: 1px solid #ccc; /* Grauer Rand */
+  padding: 10px;
+  border-radius: 5px;
+  color: black; /* Schwarz */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: left; /* Text im linken Bereich ausrichten */
+  margin-bottom: 20px; /* Zusätzlicher Abstand unten */
+}
+.question-container {
+  color:red;
+  font-size: 24px;
+  text-align: left;
+}
+ /* Antworten auf links ausrichten */
+ .question-container span {
+  color: black;
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 16px; /* Schriftgröße der Antworten */
+}
+.cblue {
+  color: blue; /* Blau */
+}
+
+.correctGreen {
+  color: green; /* Grün */
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc; /* Graue Linie */
+  margin: 10px 0;
+}
+
+
+

@@ -1,0 +1,55 @@
+
+ <div class="app-container">
+  <header class="header">
+    <h1 class="app-title">LLCE App</h1>
+    <p class="app-description">Your LPIC-1 Learning Companion</p>
+  </header>
+
+  <main class="main-content">
+    <h3 class="modeRed">Learn Mode Single</h3>
+    <button class="mode-button" routerLink="/learnlist">Question List Mode</button> <br />
+    <hr />
+
+    <h3 class="modeRed">Learning with single question</h3>
+    <div class="single-question-container">
+      <h3>Frage: {{ question.qid }} Typ: {{ question.qtyp }}</h3>
+      <span *ngFor="let txt of question.qtxt">
+        <span *ngIf="txt[0] == ' '">
+          <br />
+          <code class="cblue"> {{ txt }}</code>
+        </span>
+        <span *ngIf="txt[0] != ' '">
+          {{ txt }}
+        </span>
+      </span>
+      <div *ngIf="question.qtyp != 'fi'">
+        <div *ngFor="let ans of question.qanswers">
+          <span *ngIf="whatIsCorrect && ans.correct" class="correctGreen">
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="whatIsCorrect && !ans.correct">
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!whatIsCorrect">
+            {{ ans.txt }}
+          </span>
+        </div>
+      </div>
+      <div *ngIf="question.qtyp == 'fi'">
+        <div *ngFor="let ans of question.qanswers">
+          <span *ngIf="whatIsCorrect" class="correctGreen">
+            {{ ans.txt }}
+          </span>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="button-container">
+        <button class="fpnlButton" (click)="firstQuestion()">first</button>
+        <button class="fpnlButton" (click)="prevQuestion()">prev</button>
+        <button class="correctGreen" (click)="toggleCorrect(currentQuestion)">What is correct?</button>
+        <button class="fpnlButton" (click)="nextQuestion()">next</button>
+        <button class="fpnlButton" (click)="lastQuestion()">last</button>
+      </div>
+    </div>
+    

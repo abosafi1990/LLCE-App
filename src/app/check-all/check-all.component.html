@@ -1,0 +1,196 @@
+
+<body>
+  <h3 class="modeRed">Check Mode All</h3>
+
+<div *ngIf="popupWarning">
+  <div *ngIf="xTimesWrong < xTimesWrongMax">
+    <h1 class="modeRed">Warning: Antwort(en) geraten!</h1>
+    <h1 class="modeRed">Warning: darum eine Frage zurück :)</h1>
+    <button (click)="popupWarning = !popupWarning">OK, habe geraten :(</button>
+  </div>
+</div>
+
+<div class="modeRed" *ngIf="xTimesWrong >= xTimesWrongMax">
+  <h1 class="modeRed">Error: zu viele Antworten geraten!</h1>
+  {{ xTimesWrongMax }} mal falsch beantwortet!
+  <button routerLink="/learnlist">Zurück zum Learn Mode :)</button>
+</div>
+
+<div *ngIf="!popupWarning">
+  <button class="selquests" (click)="selectAllQuestions()">AlleFragen</button>
+  - <button class="selquests" (click)="selectMcQuestions()">nur MC</button>
+  - <button class="selquests" (click)="selectScQuestions()">nur SC</button>
+  - <button class="selquests" (click)="selectFiQuestions()">nur FI</button>
+  <br />
+  <br>
+  <br>
+  <button (click)="shuffleQuestions()">Fragen mischen</button>
+  <button (click)="shuffleAnswers()">Antworten mischen</button>
+  - AnzahlFragen: <input type="number" #numInput />
+  <button (click)="setNumberOfQuestions(numInput.value)">Select</button>
+
+  <br />
+  <br>
+  <br>
+  <div>
+    max: {{ statistic.qmax }} answered: {{ statistic.qanswered }} notanswered:
+    {{ statistic.qnotanswered }} correct: {{ statistic.qcorrect }} wrong:
+    {{ statistic.qwrong }}
+  </div>
+
+  <br />
+  
+
+  <div *ngIf="!showResults">
+    <!-- Fragentext ausgeben -->
+    Frage: {{ question.qid }} Typ: {{ question.qtyp }} <br />
+    <span *ngFor="let txt of question.qtxt">
+      <span *ngIf="txt[0] == ' '">
+        <br />
+        <code class="cblue"> {{ txt }}</code>
+      </span>
+      <span *ngIf="txt[0] != ' '">
+        {{ txt }}
+      </span>
+    </span>
+
+    <!-- MC question -->
+    <div *ngIf="question.qtyp == 'mc'">
+      <div *ngFor="let ans of question.qanswers; index as ind">
+        <span *ngIf="whatIsCorrect && ans.correct" class="correctGreen">
+          <span *ngIf="ans.givenanswer">
+            <input type="checkbox" disabled checked />
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="checkbox" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+        <span *ngIf="whatIsCorrect && !ans.correct">
+          <span *ngIf="ans.givenanswer">
+            <input type="checkbox" disabled checked />
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="checkbox" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+
+        <span *ngIf="!whatIsCorrect">
+          <input
+            *ngIf="ans.givenanswer"
+            type="checkbox"
+            name="question.qtyp"
+            (click)="selectAnswer(ind)"
+            checked
+          />
+          <input
+            *ngIf="!ans.givenanswer"
+            type="checkbox"
+            name="question.qtyp"
+            (click)="selectAnswer(ind)"
+          />
+          {{ ans.txt }}
+        </span>
+      </div>
+    </div>
+
+    <!-- SC question -->
+    <div *ngIf="question.qtyp == 'sc'">
+      <div *ngFor="let ans of question.qanswers; index as ind">
+        <span *ngIf="whatIsCorrect && ans.correct" class="correctGreen">
+          <span *ngIf="ans.givenanswer">
+            <input type="radio" disabled checked />
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="radio" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+        <span *ngIf="whatIsCorrect && !ans.correct">
+          <span *ngIf="ans.givenanswer">
+            <input type="radio" disabled checked />
+            {{ ans.txt }}
+          </span>
+          <span *ngIf="!ans.givenanswer">
+            <input type="radio" disabled />
+            {{ ans.txt }}
+          </span>
+        </span>
+
+        <span *ngIf="!whatIsCorrect">
+          <input
+            *ngIf="ans.givenanswer"
+            type="radio"
+            name="question.qtyp"
+            (click)="selectAnswerSC(ind)"
+            checked
+          />
+          <input
+            *ngIf="!ans.givenanswer"
+            type="radio"
+            name="question.qtyp"
+            (click)="selectAnswerSC(ind)"
+          />
+          {{ ans.txt }}
+        </span>
+      </div>
+    </div>
+
+    <!-- FillIn Question  -->
+    <div *ngIf="question.qtyp == 'fi'">
+      <div *ngFor="let ans of question.qanswers; index as ind">
+        <span *ngIf="whatIsCorrect" class="correctGreen">
+          {{ ans.txt }}
+        </span>
+        <span *ngIf="!whatIsCorrect">
+          <input
+            type="text"
+            name="question.qtyp"
+            #myinput
+            (keyup)="keyInput(myinput.value)"
+            (keyup.enter)="nextQuestion()"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showResults">
+    <div>
+      <h3>
+        Number of Questions: {{ statistic.qmax }} 
+        <br />
+        <br>
+        Not Answered: {{ statistic.qnotanswered }} <br />
+        Answered: {{ statistic.qanswered }} <br />
+        Correct: {{ statistic.qcorrect }} <br />
+        Wrong: {{ statistic.qwrong }} <br />
+        X Times Wrong: {{ xTimesWrong }} <br />
+      </h3>
+      <button class="modeRed" (click)="showResults = !showResults">
+        OK ok!
+      </button>
+    </div>
+    <br />
+    <br />
+  </div>
+  <br>
+  <div>
+    <button class="fpnlButton" (click)="firstQuestion()">first</button>
+  <button class="fpnlButton" (click)="prevQuestion()">prev</button>
+  <button class="correctGreen" (click)="toggleShowCorrect(currentQuestion)">
+    What is correct?
+  </button>
+  <button class="fpnlButton" (click)="nextQuestion()">next</button>
+  <button class="fpnlButton" (click)="lastQuestion()">last</button> -
+  <button class="modeRed" (click)="showResult()">RESULT</button>
+  <br />
+  </div>
+</div>
+
+</body>
+

@@ -1,0 +1,149 @@
+<body>
+  <h3 class="modeRed">Exam Exam Exam Mode {{qs.getCatalog()}}</h3>
+<div *ngIf="!xPercentFailFlag">
+  <div *ngIf="!endExamFlag">
+    <button (click)="selectExam101()">LPIC-101</button>
+    <button (click)="selectExam102()">LPIC-102</button>
+    <button class="selquests" (click)="selectAllQuestions()">AlleFragen</button>
+    - <button class="selquests" (click)="selectMcQuestions()">nur MC</button> -
+    <button class="selquests" (click)="selectScQuestions()">nur SC</button> -
+    <button class="selquests" (click)="selectFiQuestions()">nur FI</button>
+    <br>
+    <br />
+    <button (click)="shuffleQuestions()">Fragen mischen</button>
+    <button (click)="shuffleAnswers()">Antworten mischen</button>
+    - AnzahlFragen: <input type="number" #numInput />
+    <button (click)="setNumberOfQuestions(numInput.value)">Select</button>
+
+    <br />
+    <br />
+   
+
+    <div *ngIf="!showResults">
+      <!-- Fragentext ausgeben -->
+      Frage: {{ question.qid }} Typ: {{ question.qtyp }} <br />
+      <span *ngFor="let txt of question.qtxt">
+        <span *ngIf="txt[0] == ' '">
+          <br />
+          <code class="cblue"> {{ txt }}</code>
+        </span>
+        <span *ngIf="txt[0] != ' '">
+          {{ txt }}
+        </span>
+      </span>
+      <br>
+
+      <!-- MC question -->
+      <div *ngIf="question.qtyp == 'mc'">
+        <div *ngFor="let ans of question.qanswers; index as ind">
+          <span *ngIf="!whatIsCorrect">
+            <input
+              *ngIf="ans.givenanswer"
+              type="checkbox"
+              name="question.qtyp"
+              (click)="selectAnswer(ind)"
+              checked
+            />
+            <input
+              *ngIf="!ans.givenanswer"
+              type="checkbox"
+              name="question.qtyp"
+              (click)="selectAnswer(ind)"
+            />
+            {{ ans.txt }}
+          </span>
+        </div>
+      </div>
+
+      <!-- SC question -->
+      <div *ngIf="question.qtyp == 'sc'">
+        <div *ngFor="let ans of question.qanswers; index as ind">
+          <span *ngIf="!whatIsCorrect">
+            <input
+              *ngIf="ans.givenanswer"
+              type="radio"
+              name="question.qtyp"
+              (click)="selectAnswerSC(ind)"
+              checked
+            />
+            <input
+              *ngIf="!ans.givenanswer"
+              type="radio"
+              name="question.qtyp"
+              (click)="selectAnswerSC(ind)"
+            />
+            {{ ans.txt }}
+          </span>
+        </div>
+      </div>
+      <br>
+
+      <!-- FillIn Question  -->
+      <div *ngIf="question.qtyp == 'fi'">
+        <div *ngFor="let ans of question.qanswers; index as ind">
+          <span *ngIf="!whatIsCorrect">
+            <input
+              type="text"
+              name="question.qtyp"
+              #myinput
+              (keyup)="keyInput(myinput.value)"
+              (keyup.enter)="nextQuestion()"
+            />
+          </span>
+        </div>
+      </div>
+      <br>
+      <div>
+        <span *ngIf="!isFirstQuestion">
+          <button class="fpnlButton" (click)="firstQuestion()">first</button>
+          <button class="fpnlButton" (click)="prevQuestion()">prev</button>
+        </span>
+        <span *ngIf="isFirstQuestion">
+          <button class="fpnlButtonGray" (click)="firstQuestion()" disabled>
+            first
+          </button>
+          <button class="fpnlButtonGray" (click)="prevQuestion()" disabled>prev</button>
+        </span>
+    
+        <span *ngIf="!isLastQuestion">
+          <button class="fpnlButton" (click)="nextQuestion()">next</button>
+          <button class="fpnlButton" (click)="lastQuestion()">last</button> -
+        </span>
+        <span *ngIf="isLastQuestion">
+          <button class="fpnlButtonGray" (click)="nextQuestion()" disabled>next</button>
+          <button class="fpnlButtonGray" (click)="lastQuestion()" disabled>last</button>
+          -
+        </span>
+    
+        <button class="modeRed" (click)="endExam()">End Exam</button>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="endExamFlag">
+  <div>
+    <h5>
+      Number of Questions: {{ statistic.qmax }} <br />
+      Not Answerd: {{ statistic.qnotanswered }} <br />
+      Answerd: {{ statistic.qanswered }} <br />
+      Correct: {{ statistic.qcorrect }} <br />
+      Wrong: {{ statistic.qwrong }} <br />
+    </h5>
+    <p>Hier könnte man noch die Fragen mit den gegebenen Antworten anzeigen!</p>
+    <button class="modeRed" routerLink="/main">Exit Exam Mode!</button>
+  </div>
+</div>
+
+<div *ngIf="xPercentFailFlag">
+  <h1>Your Exam Quote is >= than {{ xPercentFail }}%</h1>
+  <h1>Please go to Learn or Check Mode first!</h1>
+  <button routerLink="/main">Go to Main</button>
+  <p>Hier könnte man noch die Fragen mit den gegebenen Antworten anzeigen!</p>
+</div>
+
+<br />
+<br />
+
+</body>

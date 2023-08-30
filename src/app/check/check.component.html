@@ -1,0 +1,32 @@
+
+
+
+ <div class="app-container">
+    <header class="header">
+      <h1 class="app-title">LLCE App</h1>
+      <p class="app-description">Your LPIC-1 Learning Companion</p>
+    </header>
+  
+    <main class="main-content">
+      <h2 class="main-heading">Check Mode</h2>
+      <p class="sub-heading">Select a Check Type:</p>
+  
+      <div class="mode-buttons">
+        <button  class="mode-button"  routerLink="/checkmc">Check MC</button>
+        <button class="mode-button" routerLink="/checksc">Check SC</button>
+        <button class="mode-button" routerLink="/checkfi">Check FI</button>
+        <button class="mode-button" routerLink="/checkall">Check All</button>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    function navigateTo(route) {
+      console.log(`Navigating to: ${route}`);
+    }
+  </script>
+  
+
+
+
+ 

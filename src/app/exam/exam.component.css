@@ -1,0 +1,29 @@
+.cblue {
+    color: blue;
+  }
+  .correctGreen {
+    color: green;
+    font-weight: bold;
+  
+  }
+  .fpnlButton {
+    color:black
+  }
+  .modeRed {
+    color: red;
+  }
+  .selquests {
+    color: orange
+  }
+  input[type=number] {
+    background: #fc9;
+    width: 60px;
+  }
+  .fpnlButtonGray {
+    color: gray
+  }
+  body {
+    background-color: #ffc107;
+  }
+  
+  
