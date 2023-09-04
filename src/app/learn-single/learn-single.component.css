@@ -61,22 +61,21 @@
     align-items: flex-start;
   }
   
-  /* Überschrift der Frage auf links ausrichten */
+  
   .single-question-container h3 {
     color: red;
     font-size: 24px;
     text-align: left;
   }
   
-  /* Antworten auf links ausrichten */
+  
   .single-question-container span {
     display: block;
     text-align: left;
     margin-bottom: 10px;
-    font-size: 16px; /* Schriftgröße der Antworten */
+    font-size: 16px; 
   }
   
-  /* Optional: Passen Sie den Stil der korrekten Antworten an */
   .single-question-container .correctGreen {
     color: green;
   }

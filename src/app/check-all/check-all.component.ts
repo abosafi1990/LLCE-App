@@ -282,16 +282,11 @@ export class CheckAllComponent {
 
   checkResult() {
     this.statistic.qmax = this.questions.length;
-    // count answered questions
-    // if qgivenanswerFillIn is not '' or givenanswer is true -> answered
-    // count mc and sc qnsawered questions
+    
     let mcscanswered = this.questions.filter((q) =>
       q.qanswers.find((a) => a.givenanswer == true)
     ).length;
-    // count fi answered questions
-    // let fianswered = this.questions.filter(
-    //   (q) => q.qgivenanswerFillIn != ''
-    // ).length;
+  
     this.statistic.qanswered = mcscanswered;
 
     // calc not answeredf questions

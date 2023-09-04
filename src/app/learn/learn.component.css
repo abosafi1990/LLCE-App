@@ -1,13 +1,11 @@
-/* main.component.css */
-
-.app-container {
+app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #ffc107; /* Gelb */
-  color: black; /* Schwarz */
+  background-color: #ffc107; 
+  color: black; 
 }
 
 .header {
@@ -17,12 +15,12 @@
 
 .app-title {
   font-size: 24px;
-  color: white; /* Weiß */
+  color: white; 
 }
 
 .app-description {
   font-size: 16px;
-  color: white; /* Weiß */
+  color: white; 
 }
 
 .main-content {
@@ -31,12 +29,12 @@
 
 .main-heading {
   font-size: 28px;
-  color: white; /* Weiß */
+  color: white; 
 }
 
 .sub-heading {
   font-size: 18px;
-  color: white; /* Weiß */
+  color: white; 
   margin-bottom: 20px;
 }
 
@@ -52,12 +50,15 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: salmon; /* Schwarz */
-  background-color: #fff; /* Weiß */
+  color: salmon; 
+  background-color: #fff; 
 }
 
 .modeRed {
-  color: blue; /* Rot */
+  color:red;
+}
+body {
+  background-color: #ffc107;
 }
 
   

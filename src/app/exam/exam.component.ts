@@ -163,9 +163,7 @@ export class ExamComponent {
   }
 
   nextQuestion() {
-    // exam mode: -> next question
-    //            if current question is last question
-    //            ask to exit exam
+               
     this.isLastQuestion = false;
     this.isFirstQuestion = false;
 
@@ -291,19 +289,14 @@ export class ExamComponent {
 
   checkResult() {
     this.statistic.qmax = this.questions.length;
-    // count answered questions
-    // if qgivenanswerFillIn is not '' or givenanswer is true -> answered
-    // count mc and sc qnsawered questions
+    
     let mcanswered = this.questions.filter(
       (q) => q.qtyp == 'mc' && q.qanswers.find((a) => a.givenanswer == true)
     ).length;
     let scanswered = this.questions.filter(
       (q) => q.qtyp == 'sc' && q.qanswers.find((a) => a.givenanswer == true)
     ).length;
-    // count fi answered questions
-    // let fianswered = this.questions.filter(
-    //   (q) => q.qgivenanswerFillIn != ''
-    // ).length;
+   
     let fianswered = this.questions.filter(
       (q) => q.qtyp == 'fi' && q.qanswers.find((a) => a.givenanswer == true)
     ).length;
